@@ -17,6 +17,7 @@ async def on_ready():
 
 # ------------------------------------------------------------------
 @bot.tree.command(name="teamkill", description="Sends a message about team‑killing policy")
+@discord.app_commands.check.has_role(1420006950707658783, 1419708388421406801)
 async def teamkill(interaction: discord.Interaction):
     await interaction.response.send_message(
         """Thank you for contacting us, but we do not ban players for teamkilling if it has only happened 1–2 times. We will monitor the situation, and if we detect further violations, we will take action.
