@@ -24,5 +24,26 @@ async def teamkill(interaction: discord.Interaction):
 Sincerely, the GrayWar server staff"""
     )
 
+
+@bot.tree.error  # <-- run *once* for the whole tree
+async def on_app_command_error(interaction: discord.Interaction, error):
+    """Handle all slash‑command errors in one place."""
+
+    if isinstance(error, discord.app_commands.CheckFailure):
+        if not interaction.response.is_done():
+            await interaction.response.send_message(
+                "You don’t have permission to use that command.",
+                ephemeral=True
+            )
+        else:
+            await interaction.followup.send(
+                "You don’t have permission to use that command.",
+                ephemeral=True
+            )
+
+        return
+
+    raise error
+
 # ------------------------------------------------------------------
 bot.run(TOKEN)
